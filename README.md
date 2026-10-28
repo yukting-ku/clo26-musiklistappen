@@ -10,10 +10,9 @@ Musiklistappen är en konsolapplikation som använder en SQLite-databas för att
 
 ## Så kör du den
 
-```bash
-git clone https://github.com/yukting-ku/clo26-musiklistappen.git
-cd clo26-musiklistappen/MusikApp
-dotnet run
+```
+https://github.com/yukting-ku/clo26-musiklistappen.git
+
 ```
 
 Databasfilen musikappen.db ska finnas i mappen MusikApp/. Kontrollera att appsettings.json innehåller rätt sökväg till databasen.
