@@ -1,27 +1,24 @@
 # Reflektion — Musiklistappen
 
-**Namn:** [Ditt namn]
-**Datum:** [Datum]
+**Namn:** [Yuk Ting Ku ]
+**Datum:** [2026-10-28]
 
 ---
 
 ## Vad var svårast?
 
-[Skriv här]
+Det svåraste var att använda den befintliga databasen i mitt C#-program. Det var också en utmaning att skapa olika funktioner, till exempel att visa alla låtar, söka efter en låt, lägga till nya låtar och ta bort låtar. Funktionerna använder olika SQL-kommandon och C#-kod, vilket kändes annorlunda jämfört med att arbeta med databasen i DB Browser. 
 
 ---
 
 ## Vad lärde du dig?
 
-[Skriv här]
-
+Jag lärde mig mycket, särskilt hur man använder en befintlig SQLite-databas i ett C#-program. Jag lärde mig också hur man skapar funktioner som låter användaren söka efter information, visa låtar, lägga till nya låtar och ta bort låtar från databasen.
 ---
 
 ## Hur använde du ADO.NET i praktiken — vad kändes naturligt och vad var förvirrande?
 
-Tänk på de fem stegen: öppna anslutning, skapa kommando, skriv SQL, skicka in värden, kör.
-
-[Skriv här]
+Jag använde ADO.NET för att ansluta mitt C#-program till SQLite-databasen och köra SQL-kommandon. Att skriva SQL kändes ganska naturligt eftersom jag hade arbetat med SQL tidigare. Det som var mer förvirrande var hur man skriver C#-kod för att öppna en anslutning, skapa ett kommando, skicka in parametrar och läsa resultatet från databasen. Jag lärde mig hur dessa steg fungerar tillsammans för att skapa programmets olika funktioner.
 
 ---
 
