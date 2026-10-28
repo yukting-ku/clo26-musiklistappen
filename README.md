@@ -1,4 +1,4 @@
-# Musiklistappen — [Ditt namn]
+# Musiklistappen — [Yuk Ting Ku]
 
 > **Instruktion till dig:** den här filen är *din* README. Ersätt all text i hakparenteser med din egen, och ta bort den här rutan när du är klar. Uppgiften och kraven står i [`UPPGIFT.md`](UPPGIFT.md), och inlämningen beskrivs i [`INLAMNING.md`](INLAMNING.md).
 
@@ -6,21 +6,21 @@
 
 ## Vad appen gör
 
-[Skriv här: två till tre meningar om din app. Vilken artist handlar den om och vad kan man göra i menyn?]
+Musiklistappen är en konsolapplikation som använder en SQLite-databas för att hantera låtar. I menyn kan man visa alla låtar, söka efter låtar, lägga till nya låtar och ta bort låtar. Man kan också hämta en låt genom att ange dess ID.
 
 ## Så kör du den
 
 ```bash
-git clone [länk till din fork]
-cd [mappens namn]/MusikApp
+git clone https://github.com/yukting-ku/clo26-musiklistappen.git
+cd clo26-musiklistappen/MusikApp
 dotnet run
 ```
 
-[Skriv här om något behöver göras först, t.ex. att `musik.db` ska ligga i mappen `MusikApp/`.]
+Databasfilen musikappen.db ska finnas i mappen MusikApp/. Kontrollera att appsettings.json innehåller rätt sökväg till databasen.
 
 ## Så ser huvudmenyn ut
 
-[Lägg in en screenshot här. Spara bilden i repot och länka den: `![Huvudmenyn](bild.png)`]
+(https://github.com/yukting-ku/clo26-musiklistappen/blob/main/Huvudmeny.png
 
 ---
 
