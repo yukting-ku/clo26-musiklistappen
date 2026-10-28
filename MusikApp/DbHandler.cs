@@ -20,6 +20,7 @@ namespace MusikApp;
 /// </summary>
 public class DbHandler
 {
+ private readonly string _connectionString;
     // Tips: spara bara connection string här. Den kommer från appsettings.json
     // via Program.cs (t.ex. "Data Source=musik.db").
     // Öppna sedan en NY anslutning inuti varje metod nedan.
@@ -27,7 +28,7 @@ public class DbHandler
     public DbHandler(string connectionString)
     {
         // TODO: spara connectionString i ett fält som metoderna nedan kan använda.
-        throw new NotImplementedException();
+        _connectionString = connectionString;
     }
 
     // ---------------------------------------------------------------
@@ -40,7 +41,33 @@ public class DbHandler
         // TODO: SELECT från din låt-tabell med ORDER BY.
         // TODO: loopa med reader.Read() och gör ett Song-objekt av varje rad.
         // Tips: reader.GetInt32(0), reader.GetString(1) ... eller reader["Titel"].
-        throw new NotImplementedException();
+        var songs = new List<Song>();
+
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        Console.WriteLine($"Database path: {connection.DataSource}");
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        SELECT id, album_id, title, duration_seconds
+        FROM songs
+        ORDER BY title;";
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            var song = new Song
+            {
+                Id = reader.GetInt32(0),
+                AlbumId = reader.GetInt32(1),
+                Title = reader.GetString(2),
+                DurationSeconds = reader.GetInt32(3)
+            };
+
+            songs.Add(song);
+        }
+
+        return songs;
     }
 
     /// <summary>Hämtar en specifik låt. Returnerar null om den inte finns.</summary>
@@ -48,15 +75,67 @@ public class DbHandler
     {
         // TODO: SELECT ... WHERE Id = @id (parameter!).
         // TODO: if (reader.Read()) { ... } annars returnera null.
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        SELECT id, album_id, title, duration_seconds
+        FROM songs
+        WHERE id = @id;";
+
+        command.Parameters.AddWithValue("@id", id);
+
+        using var reader = command.ExecuteReader();
+
+        if (reader.Read())
+        {
+            return new Song
+            {
+                Id = reader.GetInt32(0),
+                AlbumId = reader.GetInt32(1),
+                Title = reader.GetString(2),
+                DurationSeconds = reader.GetInt32(3)
+            };
+
+        }
+        return null;
     }
+
 
     /// <summary>Söker låtar där titeln innehåller söktexten.</summary>
     public List<Song> SearchSongs(string searchText)
     {
         // TODO: SELECT ... WHERE Titel LIKE @sok.
         // Tips: parametervärdet ska vara "%" + searchText + "%" så att LIKE matchar delar av titeln.
-        throw new NotImplementedException();
+        var songs = new List<Song>();
+
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        SELECT id, album_id, title, duration_seconds
+        FROM songs
+        WHERE title LIKE @search
+        ORDER BY title;";
+
+        command.Parameters.AddWithValue("@search", "%" + searchText + "%");
+
+        using var reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            songs.Add(new Song
+            {
+                Id = reader.GetInt32(0),
+                AlbumId = reader.GetInt32(1),
+                Title = reader.GetString(2),
+                DurationSeconds = reader.GetInt32(3)
+            });
+        }
+
+        return songs;
     }
 
     /// <summary>Lägger till en ny låt.</summary>
@@ -64,7 +143,19 @@ public class DbHandler
     {
         // TODO: INSERT INTO ... VALUES (@titel, @langd, ...) med parametrar.
         // Tips: INSERT ger ingen data tillbaka, så använd ExecuteNonQuery().
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        INSERT INTO songs (album_id, title, duration_seconds)
+        VALUES (@albumId, @title, @durationSeconds);";
+
+        command.Parameters.AddWithValue("@albumId", song.AlbumId);
+        command.Parameters.AddWithValue("@title", song.Title);
+        command.Parameters.AddWithValue("@durationSeconds", song.DurationSeconds);
+
+        command.ExecuteNonQuery();
     }
 
     /// <summary>Tar bort en låt. Returnerar true om en rad faktiskt togs bort.</summary>
@@ -73,7 +164,19 @@ public class DbHandler
         // TODO: DELETE FROM ... WHERE Id = @id.
         // Tips: ExecuteNonQuery() returnerar antalet påverkade rader.
         // Menyn i Program.cs ska fråga "Är du säker? j/n" innan den här metoden anropas.
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        DELETE FROM songs
+        WHERE id = @id;";
+
+        command.Parameters.AddWithValue("@id", id);
+
+        int rowsAffected = command.ExecuteNonQuery();
+
+        return rowsAffected > 0;
     }
 
     // ---------------------------------------------------------------
