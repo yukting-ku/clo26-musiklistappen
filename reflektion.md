@@ -14,6 +14,7 @@ Det svåraste var att använda den befintliga databasen i mitt C#-program. Det v
 ## Vad lärde du dig?
 
 Jag lärde mig mycket, särskilt hur man använder en befintlig SQLite-databas i ett C#-program. Jag lärde mig också hur man skapar funktioner som låter användaren söka efter information, visa låtar, lägga till nya låtar och ta bort låtar från databasen.
+
 ---
 
 ## Hur använde du ADO.NET i praktiken — vad kändes naturligt och vad var förvirrande?
@@ -26,13 +27,13 @@ Jag använde ADO.NET för att ansluta mitt C#-program till SQLite-databasen och 
 
 Vad kan hända om man klistrar ihop SQL med strängar i stället? (Tänk på Bobby Tables.)
 
-[Skriv här]
+Man ska använda parameteriserade queries för att skydda databasen mot SQL injection. Det betyder att användaren inte kan lägga till skadlig SQL-kod genom att skriva i ett sökfält eller ett annat inputfält. Om man klistrar ihop SQL-kommandon med användarens text direkt kan någon till exempel försöka ändra eller ta bort information i databasen. Med parametrar hanteras användarens input på ett säkrare sätt.
 
 ---
 
 ## Om du hade mer tid — vad hade du lagt till eller gjort annorlunda?
 
-[Skriv här]
+Om jag hade haft mer tid skulle jag försöka göra VG-delen av uppgiften. Jag är ändå nöjd med att ha klarat G-nivån, eftersom jag har lärt mig mycket om hur man använder SQL i C# och hur man kopplar ett C#-program till en SQLite-databas.
 
 ---
 
